@@ -1,25 +1,39 @@
 <!-- resources/views/auth/passwords/reset_request.blade.php -->
 
-@extends('layouts.app')
+<x-guest-layout>
+    <x-jet-authentication-card-logo>
+        <x-slot name="logo">
+            <!-- Se quiser, coloque aqui um logo, por exemplo, um componente <x-jet-authentication-card-logo /> -->
+        </x-slot>
 
-@section('content')
-    <div class="container">
-        <h2>Redefinir Senha</h2>
+        <!-- Validação de erros -->
+        <x-jet-validation-errors class="mb-4" />
+
+        <!-- Mensagem de status (caso exista) -->
         @if (session('status'))
-            <div class="alert alert-success">
+            <div class="mb-4 text-sm font-medium text-green-600">
                 {{ session('status') }}
             </div>
         @endif
+
+        <!-- Formulário -->
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
-            <div class="form-group">
-                <label for="email">Endereço de E-mail</label>
-                <input type="email" name="email" id="email" class="form-control" required autofocus>
-                @error('email')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+
+            <div class="mt-4">
+                <x-jet-label for="email" value="Endereço de E-mail" />
+                <x-jet-input id="email" class="block mt-1 w-full"
+                             type="email"
+                             name="email"
+                             :value="old('email')"
+                             required autofocus />
             </div>
-            <button type="submit" class="btn btn-primary">Enviar Código 2FA</button>
+
+            <div class="flex items-center justify-end mt-4">
+                <x-jet-button>
+                    Enviar Código 2FA
+                </x-jet-button>
+            </div>
         </form>
-    </div>
-@endsection
+    </x-jet-authentication-card-logo>
+</x-guest-layout>
