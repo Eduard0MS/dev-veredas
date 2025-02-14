@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'eduardo',
             'email' => 'eduardom@email.com',
             'password' => Hash::make('password'),
+            'orgao' => 'MPO',
+            'usertype' => 'admin',
         ]);
 
         // E agora chama seu seeder de conf_kr
